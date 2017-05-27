@@ -10,11 +10,11 @@ const cookieparser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const consolidate = require('consolidate');
-<<<<<<< HEAD
+//<<<<<<< HEAD
 // const passport = require('./config/passport');
-=======
+//=======
 const passport = require('passport');
->>>>>>> origin/master
+//>>>>>>> origin/master
 const database = require('./database');
 
 //-------DATABASE MODELS HERE-----------
@@ -44,7 +44,6 @@ app.get('/', function(req, res) {
 	res.render('filter.html');
 
 });
-
 
  // signIn middleware
 
@@ -144,6 +143,12 @@ app.get('/', function(req, res) {
 //     }
 //     next();
 // }
+
+app.post('/upload-logo', function(req, res){
+	console.log(req);
+	res.sendStatus(200);
+});
+
 
 app.listen(3000, function() {
 	console.log('Server is now running at port 3000');

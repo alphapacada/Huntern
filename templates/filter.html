@@ -15,6 +15,16 @@
 		...
 	</div>
 </form>
+
+<form action="/upload-logo" method="post">
+	<div>
+		<label for="logo">Upload Company Logo</label>
+		<input type="file" name="logo" id="logo">
+	</div>
+
+	<button>Upload</button>
+</form>
+
 </container>
 <script>
 	$('#searchlist').btsListFilter('#searchinput', {itemChild: 'span'});
