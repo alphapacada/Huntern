@@ -1,0 +1,19 @@
+{
+  "name": "huntern",
+  "version": "1.0.0",
+  "description": "internship hunting",
+  "main": "database.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanessanoyag/huntern.git"
+  },
+  "author": "gayon, pacada, zaldua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanessanoyag/huntern/issues"
+  },
+  "homepage": "https://github.com/vanessanoyag/huntern#readme"
+}
