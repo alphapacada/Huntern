@@ -53,7 +53,7 @@ const Admin = database.define('admin', {
   }
 });
 
-const Student = database.students('students', {
+const Student = database.define('students', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,

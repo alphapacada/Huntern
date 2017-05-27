@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/vanessanoyag/huntern/issues"
   },
-  "homepage": "https://github.com/vanessanoyag/huntern#readme"
+  "homepage": "https://github.com/vanessanoyag/huntern#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.3",
+    "passport": "^0.3.2"
+  }
 }

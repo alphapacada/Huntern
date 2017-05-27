@@ -10,7 +10,7 @@ const cookieparser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const consolidate = require('consolidate');
-const passport = require('./config/passport');
+const passport = require('passport');
 const database = require('./database');
 
 //-------DATABASE MODELS HERE-----------
@@ -40,6 +40,8 @@ app.get('/', function(req, res) {
 	res.render('filter.html');
 
 });
+
+
  // signIn middleware
 
 // var retrieveSignedInUser = function(req, res, next) {
@@ -47,7 +49,7 @@ app.get('/', function(req, res) {
 
 //     User.findOne({ where: { email:email } }).then(function(user) {
 //     	console.log("retrieveSignedInUser" + user);
-    	
+
 //     	console.log("retrieveSignedInUser2" + req.session.currentUser);
 //     	console.log("retrieveSignedInUser3" + req.session.currentUser);
 //     	req.user = user;
@@ -60,7 +62,7 @@ app.get('/', function(req, res) {
 // 	console.log("PROFILE" + email);
 // 		res.render('profile.html', {
 // 			user: req.user
-// 		}); 
+// 		});
 // });
 
 // app.post('/transfer', requireSignedIn, retrieveSignedInUser, function(req, res) {
@@ -71,10 +73,10 @@ app.get('/', function(req, res) {
 // 	console.log("TRANSFER" + user.id);
 // 	const email = req.session.currentUser;
 // 	const id = user.id;
-	
+
 // 	User.findOne({where:{email:recipient}}).then(function(senderAccount) {
 // 			Account.findOne({ where: { user_id: id, user_id:senderAccount.id}}).then(function(receiverAccount) {
-		
+
 // 			console.log("RECEIVER" + Account);
 // 				// Account.findOne({ where: { user_id: receiver.id } }).then(function(receiverAccount) {
 // 					database.transaction(function(t) {
@@ -90,8 +92,8 @@ app.get('/', function(req, res) {
 // 						res.redirect('/profile');
 // 					});
 // 	});
-	
-	 
+
+
 // });
 
 // });
@@ -100,7 +102,7 @@ app.get('/', function(req, res) {
 // 	const sender =  req.user.id;
 // 	console.log("DEPOSIT");
 
-	
+
 // 		Account.findOne({ where: { user_id: sender } }).then(function(senderAccount) {
 // 			database.transaction(function(t) {
 // 				return senderAccount.update({
@@ -129,7 +131,7 @@ app.get('/', function(req, res) {
 // 				res.redirect('/profile');
 // 			});
 // 		});
-	
+
 // });
 
 // function requireSignedIn(req, res, next) {
