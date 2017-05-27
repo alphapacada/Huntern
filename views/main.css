@@ -65,8 +65,11 @@ ul{
 	line-height: 25px;
 }
 
-.signin, .signup{
+.signin{
 	right: 12%;
+}
+
+.signin, .signup{
 	text-align: center;
 }
 
@@ -100,7 +103,7 @@ a{
 }
 
 #admin{
-	left: 30%;
+	left: 31%;
 	top: 20%;
 }
 
@@ -110,11 +113,30 @@ a{
 
 .signup{
 	top: 17%;
-	left: 30%;
+	left: 18%;
+	width: 55%;
+}
+
+.form{
+	display: flex;
+	flex-direction: row;
+}
+
+.left, .right{
+	margin: 10px;
+	
+}
+
+.right{
+	margin-left: 30px;
 }
 
 .container-signup input{
 	margin-bottom: 20px;
+}
+
+.container-signup label, .container-signup input{
+	display: inline-block;
 }
 
 .container-signup button{
