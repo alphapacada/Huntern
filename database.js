@@ -36,6 +36,9 @@ const Company = database.define('companies', {
   category: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  links: {
+    type: Sequelize.STRING,
   }
 },{
   timestamps:true
