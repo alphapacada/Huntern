@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search</title>
+</head>
+<body>
+<container>
+	<form role="form">
+	<div class="form-group">
+		<input id="searchinput" class="form-control" type="search" placeholder="Search..." />
+	</div>
+	<div id="searchlist" class="list-group">
+		<a class="list-group-item" href="blue.html"><span>blue</span></a>
+		...
+	</div>
+</form>
+</container>
+<script>
+	$('#searchlist').btsListFilter('#searchinput', {itemChild: 'span'});
+</script>
+</body>
+</html>
