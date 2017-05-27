@@ -10,7 +10,7 @@ const cookieparser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const consolidate = require('consolidate');
-const passport = require('./config/passport');
+// const passport = require('./config/passport');
 const database = require('./database');
 
 //-------DATABASE MODELS HERE-----------
@@ -24,14 +24,14 @@ app.engine('html', consolidate.nunjucks);
 app.set('views', './templates');
 app.set('routes','./routes');
 app.use('/static', express.static('./static'));
-app.use(require('./routes/auth-routes'));
+//app.use(require('./routes/auth-routes'));
 
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieparser('secret-cookie'));
 app.use(session({ resave: false, saveUninitialized: false, secret: 'secret-cookie' }));
 app.use(flash());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 //--------DO NOT DELETE ^ --------//
 
