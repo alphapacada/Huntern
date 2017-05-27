@@ -50,12 +50,7 @@ ul{
 	display: inline;
 }
 
-.title-container{
-	/*left: 50%;*/
-	display: flex;
-}
-
-.title, .signin{
+.title, .signin, .signup{
 	background-color: #C9FDD7;
 	/*height: 30%;*/
 	width: 30%;
@@ -70,7 +65,7 @@ ul{
 	line-height: 25px;
 }
 
-.signin{
+.signin, .signup{
 	right: 12%;
 	text-align: center;
 }
@@ -102,4 +97,27 @@ a{
 .admin{
 	font-size: 15px;
 	line-height: 10px;
+}
+
+#admin{
+	left: 30%;
+	top: 20%;
+}
+
+#admin button{
+	margin-bottom: 30px;
+}
+
+.signup{
+	top: 17%;
+	left: 30%;
+}
+
+.container-signup input{
+	margin-bottom: 20px;
+}
+
+.container-signup button{
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
