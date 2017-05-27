@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const database = new Sequelize('postgres://huntern:huntern@localhost:5432/kimmorsha');
+const database = new Sequelize('postgres://huntern:huntern@localhost:5432/huntern');
 
 const Company = database.define('companies', {
   id: {
@@ -41,6 +41,32 @@ const Company = database.define('companies', {
   timestamps:true
 });
 
+const Admin = database.define('admin', {
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+const Student = database.students('students', {
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
 database.sync();
 
 module.exports.Company = Company;
+module.exports.Admin = Admin;
+module.exports.Student = Student;

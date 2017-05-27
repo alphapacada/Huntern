@@ -1,0 +1,6 @@
+{
+  "development": {
+    "url": "postgres://huntern:huntern@localhost:5432/huntern",
+    "dialect": "pg"
+  }
+}
