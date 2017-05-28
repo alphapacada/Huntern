@@ -83,6 +83,8 @@ app.post('/signup', function(req, res){
 	});
 });
 
+app.
+
 app.get('/forms.html', function(req, res){
 	res.render('forms.html');
 })
@@ -90,6 +92,48 @@ app.get('/forms.html', function(req, res){
 app.get('/signup.html', function(req, res){
 	res.render('signup.html');
 })
+
+app.get('/adminlogin.html', function(req, res){
+	res.render('adminlogin.html');
+});
+
+app.post('/signin', retrieveSignedInUser, function(req, res){
+	const email = req.body.email;
+	const password = req.body.pasword;
+
+	Admin.findOne({ where: {email:email, password:password}}).then(function(user){
+
+	});
+});
+
+
+////////
+// router.post('/signin', function(req, res) {
+// 	const email = req.body.email;
+//   const password = req.body.password;
+// 	const remember = req.body.remember;
+//
+// 	User.findOne({ where: { email: email } }).then(function(user) {
+//         if (user === null) {
+//             req.flash('signInMessage', 'Incorrect email.');
+//             return res.redirect('/');
+//         }
+//
+// 		const match = bcrypt.compareSync(password, user.password);
+// 		if (!match) {
+// 			req.flash('signInMessage', 'Incorrect password.')
+// ;			return res.redirect('/');
+// 		}
+//
+//         req.flash('statusMessage', 'Signed in successfully!');
+//         req.session.currentUser = user.email;
+//         req.user = user;
+// 		if (remember) {
+// 			req.session.cookie.maxAge = 1000 * 60 * 60;
+// 		}
+// 		res.redirect('/profile');
+//     });
+// });
 
 app.post('/companydetails', retrieveSignedInUser, function (req, res) {
 	const companyName = req.body.companyName;
