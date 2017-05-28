@@ -1,8 +1,4 @@
-/*---------REQUIRED------------------
-
-
-*/
-
+/*---------REQUIRED------------------*/
 
 const express = require('express');
 const bodyparser = require('body-parser');
@@ -10,16 +6,15 @@ const cookieparser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('express-flash');
 const consolidate = require('consolidate');
-//<<<<<<< HEAD
+const multer = require('multer');
 // const passport = require('./config/passport');
-//=======
 const passport = require('passport');
-//>>>>>>> origin/master
 const database = require('./database');
 
 //-------DATABASE MODELS HERE-----------
-// const User = require('./models').User;
-// const Account = require('./models').Account;
+const Company = require('./database').Company;
+const Admin = require('./database').Admin;
+const Student = require('./database').Student;
 
 const app = express();
 
@@ -30,125 +25,107 @@ app.set('routes','./routes');
 app.use('/static', express.static('./static'));
 //app.use(require('./routes/auth-routes'));
 
-
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieparser('secret-cookie'));
 app.use(session({ resave: false, saveUninitialized: false, secret: 'secret-cookie' }));
 app.use(flash());
 // app.use(passport.initialize());
 
+app.use('./static', express.static('./static'));
+app.use('/logo', express.static('./uploads'));
+//app.use(require('./auth-routes'));
+
+
 //--------DO NOT DELETE ^ --------//
 
 app.get('/', function(req, res) {
 	console.log('body of render.');
-	res.render('filter.html');
+	res.render('index.html');
+});
+
+app.get('/signup.html', function(req, res){
+	res.render('signup.html');
+})
+
+var retrieveSignedInUser = function(req, res, next) {
+	const email = req.session.currentUser;
+
+    User.findOne({ where: { email:email } }).then(function(user) {
+    	console.log("retrieveSignedInUser" + user);
+    	req.user = user;
+    	next();
+    });
+}
+
+app.post('/signup', function(req, res){
+	const name = req.body.name;
+	const email = req.body.email;
+	const password = req.body.password;
+	const confirmpassword = req.body.confirmpassword;
+
+	if(password !== confirmpassword) {
+		return res.redirect('/');
+	}
+
+	Student.findOne({
+		where: {email: email},
+		attributes: ['email'] }
+	).then(function(student){
+		if (student !== null) {
+			console.log('Email is already in use');
+			return res.redirect('/');
+		}
+
+		Student.create({ email: email, password: password, name: name }).then(function() {
+			console.log('Signed Up Successfully!');
+			res.redirect('forms.html');
+		});
+	});
+});
+
+app.get('/forms.html', function(req, res){
+	res.render('forms.html');
+})
+
+app.get('/signup.html', function(req, res){
+	res.render('signup.html');
+})
+
+app.post('/companydetails', retrieveSignedInUser, function (req, res) {
+	const companyName = req.body.companyName;
+	const companyAbout = req.body.companyAbout;
+	const location = req.body.location;
+	const email = req.body.email;
+	const website = req.body.website;
+	const number = req.body.number;
+	const program = req.body.program;
+	const category = req.body.category;
+
+	Company.create({ companyName: companyName,
+		companyAbout: companyAbout,
+		location: location,
+		email: email,
+		website: website,
+		number: number,
+	 	program: program,
+		category: category
+	}).then(function() {
+		console.log('Details Updated Successfully!');
+		res.redirect('forms.html'); //html to alpha's forms 2
+	});
 
 });
 
- // signIn middleware
+// const upload = multer({ dest: "./uploads"});
 
-// var retrieveSignedInUser = function(req, res, next) {
-// 	const email = req.session.currentUser;
-
-//     User.findOne({ where: { email:email } }).then(function(user) {
-//     	console.log("retrieveSignedInUser" + user);
-
-//     	console.log("retrieveSignedInUser2" + req.session.currentUser);
-//     	console.log("retrieveSignedInUser3" + req.session.currentUser);
-//     	req.user = user;
-//     	next();
-//     });
-// }
-// app.get('/profile', requireSignedIn, retrieveSignedInUser, function(req, res) {
-// 	const email = req.user;
-// 	const name = req.user;
-// 	console.log("PROFILE" + email);
-// 		res.render('profile.html', {
-// 			user: req.user
-// 		});
-// });
-
-// app.post('/transfer', requireSignedIn, retrieveSignedInUser, function(req, res) {
-// 	//console.log("transfer" + req.user);
-// 	const recipient = req.body.recipient;
-// 	const amount = parseInt(req.body.amount, 10);
-// 	const user = req.user;
-// 	console.log("TRANSFER" + user.id);
-// 	const email = req.session.currentUser;
-// 	const id = user.id;
-
-// 	User.findOne({where:{email:recipient}}).then(function(senderAccount) {
-// 			Account.findOne({ where: { user_id: id, user_id:senderAccount.id}}).then(function(receiverAccount) {
-
-// 			console.log("RECEIVER" + Account);
-// 				// Account.findOne({ where: { user_id: receiver.id } }).then(function(receiverAccount) {
-// 					database.transaction(function(t) {
-// 						return senderAccount.update({
-// 							balance: senderAccount.balance - amount
-// 						}, { transaction: t }).then(function() {
-// 							return receiverAccount.update({
-// 								balance: receiverAccount.balance + amount
-// 							}, { transaction: t });
-// 						});
-// 					}).then(function() {
-// 						req.flash('statusMessage', 'Transferred ' + amount + ' to ' + recipient);
-// 						res.redirect('/profile');
-// 					});
+// app.post('/upload-logo', upload.single('logo'), function(req, res){
+//
+// 	const id = res.session.currentUser;
+// 	User.findOne({where {id:id}}).then(function(user){
+// 			user.update({logo: '/logo/' + req.file.filename});
+// 			res.redirect('/profile'); //
 // 	});
-
-
 // });
-
-// });
-// app.post('/deposit', requireSignedIn,  retrieveSignedInUser, function(req, res){
-// 	const amount = parseInt(req.body.amount, 10);
-// 	const sender =  req.user.id;
-// 	console.log("DEPOSIT");
-
-
-// 		Account.findOne({ where: { user_id: sender } }).then(function(senderAccount) {
-// 			database.transaction(function(t) {
-// 				return senderAccount.update({
-// 					balance: senderAccount.balance + amount
-// 				}, { transaction: t });
-// 			}).then(function() {
-// 				req.flash('statusMessage', 'Deposit of ' + amount + ' is succesful');
-// 				res.redirect('/profile');
-// 			});
-// 		});
-// 	});
-
-
-// app.post('/withdraw', requireSignedIn,retrieveSignedInUser, function(req, res){
-// 	const amount = parseInt(req.body.amount, 10);
-// 	const sender = req.user.id
-
-// 	//User.findOne({ where: { email: email } }).then(function(sender) {
-// 		Account.findOne({ where: { user_id: sender } }).then(function(senderAccount) {
-// 			database.transaction(function(t) {
-// 				return senderAccount.update({
-// 					balance: senderAccount.balance - amount
-// 				}, { transaction: t });
-// 			}).then(function() {
-// 				req.flash('statusMessage', 'Withdrawal of ' + amount + ' is succesful');
-// 				res.redirect('/profile');
-// 			});
-// 		});
-
-// });
-
-// function requireSignedIn(req, res, next) {
-//     if (!req.session.currentUser) {
-//         return res.redirect('/');
-//     }
-//     next();
-// }
-
-app.post('/upload-logo', function(req, res){
-	console.log(req);
-	res.sendStatus(200);
-});
-
 
 app.listen(3000, function() {
 	console.log('Server is now running at port 3000');

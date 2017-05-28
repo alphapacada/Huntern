@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="editor.js">
+
+		</script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<!-- <link href="./static/editor.css" type="text/css" rel="stylesheet"/> -->
+		<link href="./static/forms.css" type="text/css" rel = "stylesheet"/>
+		<title>LineControl | v1.1.0</title>
+
+		</head>
+<body>
+<div class="container text-center" id = "title">
+
+<h1>Company Details</h1>
+</div>
+<div class ="container" id="maincontainer">
+	<form action="/companydetails" method="post" class = "center">
+		<div class = "form-row">
+			<div class="form-group">
+   				 <label for="companyName">About the Company</label>
+    			<small name="companyName" class="form-control" id="exampleTextarea" rows="4"></textarea>
+  			</div>
+			<div class="form-group">
+   				 <label for="companyAbout">About the Company</label>
+    			<textarea name="companyAbout" class="form-control" id="exampleTextarea" rows="4"></textarea>
+  			</div>
+				<div class="form-group">
+	   				 <label for="location">About the Company</label>
+	    			<textarea name="location" class="form-control" id="exampleTextarea" rows="4"></textarea>
+	  			</div>
+					<div class="form-group">
+		   				 <label for="website">About the Company</label>
+		    			<textarea name="website" class="form-control" id="exampleTextarea" rows="4"></textarea>
+		  			</div>
+  		<div class="form-group">
+    <label for="email">Email to contact</label>
+    <input for="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted"></small>
+  </div>
+  </div>
+  <div class="form-group">
+    <label for="number">Contact Number</label>
+    <input name="number" type="tel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter phone number">
+    <small id="emailHelp" class="form-text text-muted"></small>
+  </div>
+
+  <div class="form-group">
+    <label for="category">Select Category</label>
+    <select name="category" class="form-control" id="exampleSelect1">
+      <option>Psychology</option>
+      <option>Computer Science</option>
+      <option>Mathematics</option>
+      <option>Biology</option>
+      <option>Political Science</option>
+    </select>
+  </div>
+  <div class="form-group">
+   				 <label for="program">Internship Program Details (Qualifications, Interview and Exam Schedules, etc.)</label>
+    			<textarea name="program" class="form-control" id="exampleTextareaP" rows="4"></textarea>
+  			</div>
+  <label class="custom-file">
+  <input type="file" id="file" class="custom-file-input">
+  <span class="custom-file-control"></span>
+</label>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success">Continue</button>
+    </div>
+  </div>
+</form>
+
+
+	</div>
+
+
+
+</body>
+</html>

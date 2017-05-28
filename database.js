@@ -37,7 +37,7 @@ const Company = database.define('companies', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  links: {
+  logo: {
     type: Sequelize.STRING,
   }
 },{
@@ -61,6 +61,10 @@ const Student = database.define('students', {
     type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true
+  },
+  name:{
+    type: Sequelize.STRING,
+    allowNull: false
   },
   password: {
     type: Sequelize.STRING,
