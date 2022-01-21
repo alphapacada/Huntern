@@ -21,7 +21,7 @@ const app = express();
 app.engine('html', consolidate.nunjucks);
 //------------ROUTING------------------
 app.set('views', './templates');
-app.set('routes','./routes');
+app.set('routes', './routes');
 app.use('/static', express.static('./static'));
 //app.use(require('./routes/auth-routes'));
 
@@ -38,70 +38,69 @@ app.use('/logo', express.static('./uploads'));
 
 //--------DO NOT DELETE ^ --------//
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
 	console.log('body of render.');
 	res.render('index.html');
 });
 
-app.get('/signup.html', function(req, res){
+app.get('/signup.html', function (req, res) {
 	res.render('signup.html');
 })
 
-var retrieveSignedInUser = function(req, res, next) {
+var retrieveSignedInUser = function (req, res, next) {
 	const email = req.session.currentUser;
 
-    User.findOne({ where: { email:email } }).then(function(user) {
-    	console.log("retrieveSignedInUser" + user);
-    	req.user = user;
-    	next();
-    });
+	User.findOne({ where: { email: email } }).then(function (user) {
+		console.log("retrieveSignedInUser" + user);
+		req.user = user;
+		next();
+	});
 }
 
-app.post('/signup', function(req, res){
+app.post('/signup', function (req, res) {
 	const name = req.body.name;
 	const email = req.body.email;
 	const password = req.body.password;
 	const confirmpassword = req.body.confirmpassword;
 
-	if(password !== confirmpassword) {
+	if (password !== confirmpassword) {
 		return res.redirect('/');
 	}
 
 	Student.findOne({
-		where: {email: email},
-		attributes: ['email'] }
-	).then(function(student){
+		where: { email: email },
+		attributes: ['email']
+	}
+	).then(function (student) {
 		if (student !== null) {
 			console.log('Email is already in use');
 			return res.redirect('/');
 		}
 
-		Student.create({ email: email, password: password, name: name }).then(function() {
+		Student.create({ email: email, password: password, name: name }).then(function () {
 			console.log('Signed Up Successfully!');
 			res.redirect('forms.html');
 		});
 	});
 });
 
-app.
-
-app.get('/forms.html', function(req, res){
+app.get('/forms.html', function (req, res) {
 	res.render('forms.html');
 })
 
-app.get('/signup.html', function(req, res){
+app.get('/signup.html', function (req, res) {
 	res.render('signup.html');
 })
 
-app.get('/adminlogin.html', function(req, res){
+app.get('/adminlogin.html', function (req, res) {
 	res.render('adminlogin.html');
 });
 
-app.post('/signin', retrieveSignedInUser, function(req, res){
+app.post('/signin', retrieveSignedInUser, function (req, res) {
 	const email = req.body.email;
 	const password = req.body.pasword;
 
-	Admin.findOne({ where: {email:email, password:password}}).then(function(user){
+	Admin.findOne({ where: { email: email, password: password } }).then(function (user) {
 
 	});
 });
@@ -145,15 +144,16 @@ app.post('/companydetails', retrieveSignedInUser, function (req, res) {
 	const program = req.body.program;
 	const category = req.body.category;
 
-	Company.create({ companyName: companyName,
+	Company.create({
+		companyName: companyName,
 		companyAbout: companyAbout,
 		location: location,
 		email: email,
 		website: website,
 		number: number,
-	 	program: program,
+		program: program,
 		category: category
-	}).then(function() {
+	}).then(function () {
 		console.log('Details Updated Successfully!');
 		res.redirect('forms.html'); //html to alpha's forms 2
 	});
@@ -171,6 +171,6 @@ app.post('/companydetails', retrieveSignedInUser, function (req, res) {
 // 	});
 // });
 
-app.listen(3000, function() {
+app.listen(3000, function () {
 	console.log('Server is now running at port 3000');
 });
